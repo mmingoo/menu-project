@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="title" content="웹사이트">
+  <meta name="description" content="웹사이트입니다.">
+  <meta name="keywords" content="키워드,키워드,키워드">
+  <meta property="og:title" content="웹사이트">
+  <meta property="og:description" content="웹사이트입니다">
+  <meta property="og:image" content="https://웹사이트/images/opengraph.png">
+  <meta property="og:url" content="https://웹사이트">
+  <title>제3생활관(ai관 옆) 식당 메뉴 | 식단홈페이지</title>
+  <link rel="stylesheet" href="../resources/css/setting.css">
+  <link rel="stylesheet" href="../resources/css/plugin.css">
+  <link rel="stylesheet" href="../resources/css/template.css">
+  <link rel="stylesheet" href="../resources/css/common.css">
+  <link rel="stylesheet" href="../resources/css/style.css">
+</head>
+
+<body>
+  <!-- [S]basic-N1 -->
+  <header class="basic-N1" data-bid="xM11jLxKXPu" id="">
+    <div class="header-inner">
+      <div class="header-container container-lg">
+        <h1 class="header-title">
+          <a href = "/">
+            <img src="../medias/91ac0d6736d04c0eba9305629023604a.jpg" alt="">
+          </a>
+        </h1>
+        <div class="header-center">
+          <div class="header-title header-mobile-top">
+            <a>
+              <img src="../resources/images/img_logo_black.png" alt="로고">
+            </a>
+          </div>
+          <ul class="header-gnblist">
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+              </a>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="dormitory">
+                <span>이번 주 제3생활관(AI관 옆) 메뉴</span>
+              </a>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="arm">
+                <span>이번 주 교육대학원(아름관) 메뉴</span>
+              </a>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="visiontower">
+                <span>이번 주 비전타워 1층 메뉴</span>
+              </a>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" href="javascript:void(0)">
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="header-right">
+          <div class="header-utils">
+            <button class="btn-allmenu">
+              <img src="../resources/icons/ico_menu_black.svg" alt="PC메뉴 아이콘">
+            </button>
+            <button class="btn-momenu">
+              <img src="../resources/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
+            </button>
+            <button class="btn-close">
+              <img src="../resources/icons/ico_close_black.svg" alt="닫기 아이콘">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-dim"></div>
+  </header>
+  <!-- [E]basic-N1 -->
+  <main class="th-layout-main ">
+    <!-- [S]basic-N22 -->
+    <div class="basic-N22" data-bid="CG2Cpbtp0Hn" id="">
+      <div class="contents-inner">
+        <div class="contents-container container-md">
+          <div class="textset">
+            <h2 class="textset-tit">이번 주 비전타워 1층 메뉴</h2>
+          </div>
+            <div class="contents-group" >
+              <a href="javascript:void(0);" th:each = "menu: ${menus}" class="cardset cardset-inner cardset-hover cardset-border">
+                <div class="cardset-cont" data-aos="fade-up">
+                  <h2 class="cardset-tit" th:text="${menu.date}"></h2>
+                  <p class="cardset-desc" th:text = "${menu.morningMenu}"></p>
+                  <p class="cardset-desc" th:text = "${menu.launchMenuA}"></p>
+                  <p class="cardset-desc" th:text = "${menu.launchMenuB}"></p>
+                  <p class="cardset-desc" th:text = "${menu.launchMenuC}"></p>
+                  <p class="cardset-desc" th:text = "${menu.dailyMarket}"></p>
+
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [E]basic-N22 -->
+    <!-- [S]basic-N7 -->
+    <div class="basic-N7" data-bid="kZ2cpBwc62q" id="">
+    </div>
+    <!-- [E]basic-N7 -->
+  </main>
+  <script src="../resources/js/setting.js"></script>
+  <script src="../resources/js/plugin.js"></script>
+  <script src="../resources/js/template.js"></script>
+  <script src="../resources/js/common.js"></script>
+  <script src="../resources/js/script.js"></script>
+</body>
