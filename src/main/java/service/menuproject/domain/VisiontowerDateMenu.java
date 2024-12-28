@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Entity
 @Setter @Getter
-public class VisiontowerDateMenu {
+public class    VisiontowerDateMenu {
 
     @Id
     @GeneratedValue
