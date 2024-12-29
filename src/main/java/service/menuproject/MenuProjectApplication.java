@@ -3,7 +3,6 @@ package service.menuproject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import service.menuproject.service.CrawlQueryService;
 
 @SpringBootApplication
 @RequiredArgsConstructor

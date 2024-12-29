@@ -2,7 +2,7 @@ package service.menuproject.converter.toEntity;
 import service.menuproject.domain.University;
 import service.menuproject.web.dto.Request.UniversityRequest;
 
-public class toUniversityEntity {
+public class ToUniversityEntity {
     public static University toUniversity(UniversityRequest.CreateUniversityDto universityDto){
         return University.builder()
                 .name(universityDto.getName())

@@ -4,7 +4,7 @@ package service.menuproject.web.contoroller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import service.menuproject.service.CrawlServiceCommandImpl;
+import service.menuproject.service.crawl.CrawlServiceCommandImpl;
 
 import java.io.IOException;
 

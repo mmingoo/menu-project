@@ -1,4 +1,4 @@
-package service.menuproject.service;
+package service.menuproject.service.university;
 
 import service.menuproject.web.dto.Request.UniversityRequest;
 

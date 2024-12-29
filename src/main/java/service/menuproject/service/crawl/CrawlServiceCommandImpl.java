@@ -1,4 +1,4 @@
-package service.menuproject.service;
+package service.menuproject.service.crawl;
 
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;

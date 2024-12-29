@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import service.menuproject.base.BaseResponse;
-import service.menuproject.service.UniversityCommandService;
+import service.menuproject.repository.RestaurantRepository;
+import service.menuproject.service.restaurant.RestaurantCommandService;
+import service.menuproject.service.university.UniversityCommandService;
+import service.menuproject.web.dto.Request.RestaurantRequest;
 import service.menuproject.web.dto.Request.UniversityRequest;
 
 @RestController
@@ -14,6 +17,7 @@ import service.menuproject.web.dto.Request.UniversityRequest;
 @RequestMapping("/setting")
 public class TotalController {
     private final UniversityCommandService universityCommandService;
+    private final RestaurantCommandService restaurantCommandService;
 
     @PostMapping("/university")
     public BaseResponse<Long> addUniversity(
@@ -24,12 +28,12 @@ public class TotalController {
         return BaseResponse.onSuccess(universityId);
     }
 
-    @PostMapping("/restaurants")
-    public BaseResponse<Long> addRestaurants(
-            @RequestBody UniversityRequest.CreateUniversityDto universityDto
-    )
+    @PostMapping("/restaurant")
+    public BaseResponse<Long> addRestaurant(
+                                            @RequestBody RestaurantRequest.CreateRestaurantDto createRestaurantDto
+                                            )
     {
-        long universityId = universityCommandService.addUniversity(universityDto);
+        long universityId = restaurantCommandService.addRestaurant(createRestaurantDto);
         return BaseResponse.onSuccess(universityId);
     }
 
