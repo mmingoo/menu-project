@@ -1,21 +1,32 @@
-package service.menuproject.repository;
+package service.menuproject.service;
 
+import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
-public class Crawl {
+@RequiredArgsConstructor
+@Service
+public class CrawlServiceCommandImpl implements CrawlServiceCommand {
+    private final CrawlQueryService crawlQueryService;
+
     List<String> menuList = new ArrayList<>();
     List<String> dateList = new ArrayList<>();
+
+
+
+
+
+
+
     public List<String> crawlDate(String pageurl) throws IOException {
-    Elements rows = crawl(pageurl);
+        Elements rows = crawl(pageurl);
         return selectDate(rows);
     }
 
@@ -25,15 +36,7 @@ public class Crawl {
         return selectMenu(rows);
     }
 
-    public Elements crawl(String pageurl) throws IOException {
-        String url = pageurl;
-        Document doc = Jsoup.connect(url).get();
-        Elements tables = doc.select(".table_1 table");
-        String date;
 
-        Elements rows = tables.select("tbody tr");
-        return rows;
-    }
     public List<String> selectDate(Elements rows){
         for(Element row : rows){
             Elements dateElement = row.select("th");
@@ -51,15 +54,15 @@ public class Crawl {
         return menuList;
     }
 
-//    private List<String> createDate(){
-//        List<String> newDateList = new ArrayList<>();
-//        for (String date : dateList) {
-//            if (!date.isEmpty()) {
-//                newDateList.add(date);
-//            }
-//        }
-//        return newDateList;
-//    }
+
+    public Elements crawl(String pageurl) throws IOException {
+        String url = pageurl;
+        Document doc = Jsoup.connect(url).get();
+        Elements tables = doc.select(".table_1 table");
+        String date;
+
+        Elements rows = tables.select("tbody tr");
+        return rows;
+    }
+
 }
-
-
