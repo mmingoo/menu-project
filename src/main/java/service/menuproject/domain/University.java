@@ -2,6 +2,7 @@ package service.menuproject.domain;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,6 +27,12 @@ public class University {
 
     @OneToMany(mappedBy = "university", cascade = CascadeType.ALL)
     private List<Restaurant> restaurantList = new ArrayList<>();
+
+    @Builder
+    public University (String name, String location){
+        this.name = name;
+        this.location = location;
+    }
 
 }
 

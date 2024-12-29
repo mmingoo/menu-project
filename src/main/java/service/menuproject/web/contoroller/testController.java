@@ -1,11 +1,9 @@
-package service.menuproject.controller;
+package service.menuproject.web.contoroller;
 
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import service.menuproject.service.CrawlQueryService;
-import service.menuproject.service.CrawlServiceCommand;
 import service.menuproject.service.CrawlServiceCommandImpl;
 
 import java.io.IOException;
