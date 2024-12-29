@@ -19,7 +19,6 @@ public class Menu {
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
-    @Enumerated(EnumType.STRING)
-    private MealType mealType;
+    private String mealType;
 
 }

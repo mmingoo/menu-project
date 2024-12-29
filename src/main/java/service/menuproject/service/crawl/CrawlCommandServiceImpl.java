@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class CrawlServiceCommandImpl implements CrawlServiceCommand {
+public class CrawlCommandServiceImpl implements CrawlCommandService {
     private final CrawlQueryService crawlQueryService;
 
     List<String> menuList = new ArrayList<>();
@@ -24,19 +24,19 @@ public class CrawlServiceCommandImpl implements CrawlServiceCommand {
 
 
 
-
+    @Override
     public List<String> crawlDate(String pageurl) throws IOException {
         Elements rows = crawl(pageurl);
         return selectDate(rows);
     }
 
-
+    @Override
     public List<String> crawlMenu(String pageurl) throws IOException {
         Elements rows = crawl(pageurl);
         return selectMenu(rows);
     }
 
-
+    @Override
     public List<String> selectDate(Elements rows){
         for(Element row : rows){
             Elements dateElement = row.select("th");
@@ -46,6 +46,7 @@ public class CrawlServiceCommandImpl implements CrawlServiceCommand {
         return dateList;
     }
 
+    @Override
     public List<String> selectMenu(Elements rows){
         for(Element row : rows){
             Elements menuCells = row.select("td");
@@ -55,11 +56,11 @@ public class CrawlServiceCommandImpl implements CrawlServiceCommand {
     }
 
 
+    @Override
     public Elements crawl(String pageurl) throws IOException {
         String url = pageurl;
         Document doc = Jsoup.connect(url).get();
         Elements tables = doc.select(".table_1 table");
-        String date;
 
         Elements rows = tables.select("tbody tr");
         return rows;
