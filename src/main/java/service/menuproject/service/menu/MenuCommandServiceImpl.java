@@ -5,8 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import service.menuproject.base.enums.DayOfWeek;
+import service.menuproject.domain.Menu;
+import service.menuproject.domain.Restaurant;
+import service.menuproject.repository.MenuRepository;
 import service.menuproject.service.crawl.CrawlCommandServiceImpl;
 import org.jsoup.nodes.Element;
+import service.menuproject.service.restaurant.RestaurantQueryService;
 import service.menuproject.web.dto.Request.CrawlDto;
 
 import java.io.IOException;
@@ -18,6 +22,8 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class MenuCommandServiceImpl implements  MenuCommandService {
     private final CrawlCommandServiceImpl crawlCommandServiceImpl;
+    private final RestaurantQueryService restaurantQueryService;
+    private final MenuRepository menuRepository;
     String currentDate = null;
     String currentDayOfWeek = null;
 
@@ -28,26 +34,36 @@ public class MenuCommandServiceImpl implements  MenuCommandService {
         String visiontowerUrl = "https://www.gachon.ac.kr/kor/7347/subview.do";
 
         Elements rows = crawlCommandServiceImpl.crawl(visiontowerUrl);
+        Restaurant restaurant = restaurantQueryService.findByName("비전타워 식당");
 
+        System.out.println(rows);
         for(Element row : rows ) {
 
+            // 날짜 관련 정보 추출
             CrawlDto.DateInfo dateInfo = getDateAndDayOfWeek(row);
-            if (dateInfo != null) {
+
+            // 메뉴 정보 관련 추출
+            CrawlDto.MenuInfo menuInfo = getMenu(row);
+
+            if (dateInfo != null && menuInfo != null) {
 
                 //String 형식의 Date를 LocalDate 형식으로 변환
                 LocalDate date = LocalDate.parse(dateInfo.getDate(), DateTimeFormatter.ofPattern("yyyy.MM.dd"));
 
                 // 요일 변환 (short name -> enum)
                 DayOfWeek dayOfWeek = DayOfWeek.fromShortName(dateInfo.getDayOfWeek());
+
+                // 객체 생성
+                Menu visiontowerMenu = Menu.builder()
+                        .type(dayOfWeek)
+                        .mealType(menuInfo.getTimeSlot())
+                        .menu(menuInfo.getMenu())
+                        .date(date)
+                        .restaurant(restaurant)
+                        .build();
+
+                menuRepository.save(visiontowerMenu);
             }
-
-
-            CrawlDto.MenuInfo menuInfo = getMenu(row);
-            if(menuInfo != null){
-                String timeSlot = menuInfo.getTimeSlot();
-                String menu = menuInfo.getMenu();
-            }
-
 
         }
 
