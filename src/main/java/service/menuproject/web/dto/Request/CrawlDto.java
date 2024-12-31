@@ -15,13 +15,6 @@ public class CrawlDto {
         //요일
         private  String dayOfWeek;
 
-        public void setDate(String date) {
-            this.date = date;
-        }
-
-        public void setDayOfWeek(String dayOfWeek) {
-            this.dayOfWeek = dayOfWeek;
-        }
     }
 
     @Getter

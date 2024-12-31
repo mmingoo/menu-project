@@ -16,25 +16,29 @@ public class testController {
     private final CrawlCommandServiceImpl crawlCommandServiceImpl;
     private  String pageurl = "https://www.gachon.ac.kr/kor/7347/subview.do";
 
-    @PostMapping("/crawl")
-    public void crawl() throws IOException {
-        System.out.println(crawlCommandServiceImpl.crawl(pageurl));
-    }
-    @PostMapping("/crawlDate")
-    public void crawlDate() throws IOException {
-        System.out.println(crawlCommandServiceImpl.crawlDate(pageurl));
 
-    }
-    @PostMapping("/crawlMenu")
-    public void crawlMenu() throws IOException {
-        System.out.println(crawlCommandServiceImpl.crawlMenu(pageurl));
-
-    }
 
     @PostMapping("/crawl/visiontower")
     public void crawlVisiontower() throws IOException{
         menuCommandService.createVisiontowerMenu();
     }
+
+    @PostMapping("/crawl/arm")
+    public void crawlArm() throws IOException{
+        menuCommandService.createArmMenu();
+    }
+
+    @PostMapping("/crawl/dormitory")
+    public void crawlDormitory() throws IOException{
+        menuCommandService.createDormitoryMenu();
+    }
+
+
+    @PostMapping("/crawl/medical")
+    public void crawlMedical() throws IOException{
+        menuCommandService.createMedicalMenu();
+    }
+
 
 }
 

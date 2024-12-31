@@ -4,7 +4,8 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum RestaurantErrorStatus implements BaseErrorCodeInterface {
-    RESTAURANT_NOT_FOUND(HttpStatus.BAD_REQUEST, "RESTAURANT_4001", "존재하지 않는 식당입니다.");
+    RESTAURANT_NOT_FOUND(HttpStatus.BAD_REQUEST, "RESTAURANT_4001", "존재하지 않는 식당입니다."),
+    RESTAURANT_EXIST(HttpStatus.BAD_REQUEST, "RESTAURANT_4002", "이미 존재하는 식당입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;

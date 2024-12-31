@@ -2,6 +2,8 @@ package service.menuproject.service.restaurant;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import service.menuproject.base.exception.RestApiException;
+import service.menuproject.base.exception.RestaurantErrorStatus;
 import service.menuproject.domain.Restaurant;
 import service.menuproject.repository.RestaurantRepository;
 import service.menuproject.service.university.UniversityQueryService;
@@ -19,6 +21,11 @@ public class RestaurantCommandServiceImpl implements RestaurantCommandService{
     //Todo: 식당 추가 기능
     @Override
     public Long addRestaurant(RestaurantRequest.CreateRestaurantDto restaurantDto){
+
+        restaurantRepository.findByName(restaurantDto.getName())
+                .ifPresent(u ->{
+                    throw new RestApiException(RestaurantErrorStatus.RESTAURANT_EXIST);
+                });
         // dto -> entity 로 변환
         Restaurant restaurant = toRestaurant(restaurantDto);
 
