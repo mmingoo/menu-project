@@ -66,16 +66,13 @@ public class MenuQueryServiceImpl implements MenuQueryService{
         Restaurant visiontower = restaurantQueryService.findByName("비전타워 식당");
 
         Map<LocalDate, List<VisiontowerMenuDTO.TodayMenuInfo>> groupedMenus = menuRepository.findByRestaurant(visiontower).stream()
-                .map(menu -> {
-                    Menu menuEntity = (Menu) menu; // 명시적 타입 캐스팅
-                    return VisiontowerMenuDTO.TodayMenuInfo.builder()
-                            .date(menuEntity.getDate())
-                            .restaurantId(menuEntity.getRestaurant().getId())
-                            .menu(menuEntity.getMenu())
-                            .dayOfWeek(menuEntity.getType())
-                            .mealType(menuEntity.getMealType())
-                            .build();
-                })
+                .map(menu -> VisiontowerMenuDTO.TodayMenuInfo.builder()
+                            .date(menu.getDate())
+                            .restaurantId(menu.getRestaurant().getId())
+                            .menu(menu.getMenu())
+                            .dayOfWeek(menu.getType())
+                            .mealType(menu.getMealType())
+                            .build())
                 .collect(Collectors.groupingBy(VisiontowerMenuDTO.TodayMenuInfo::getDate));
 
         List<VisiontowerMenuDTO.RestaurantWeekMenus> dateMenusList = List.of(
