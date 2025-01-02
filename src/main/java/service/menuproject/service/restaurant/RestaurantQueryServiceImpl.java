@@ -20,4 +20,11 @@ public class RestaurantQueryServiceImpl implements RestaurantQueryService{
         return restaurant;
     }
 
+    @Override
+    public Restaurant findById(Long id){
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new RestApiException(RestaurantErrorStatus.RESTAURANT_NOT_FOUND));
+
+        return restaurant;
+    }
 }

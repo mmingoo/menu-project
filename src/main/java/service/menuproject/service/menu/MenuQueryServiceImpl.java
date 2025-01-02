@@ -3,10 +3,12 @@ package service.menuproject.service.menu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import service.menuproject.domain.Menu;
 import service.menuproject.domain.Restaurant;
 import service.menuproject.repository.MenuRepository;
-import service.menuproject.repository.RestaurantRepository;
-import service.menuproject.web.dto.Response.MenuDTO;
+import service.menuproject.service.restaurant.RestaurantQueryService;
+import service.menuproject.web.dto.Response.HomeMenuDTO;
+import service.menuproject.web.dto.Response.VisiontowerMenuDTO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,14 +22,16 @@ public class MenuQueryServiceImpl implements MenuQueryService{
 
     private final MenuRepository menuRepository;
 
-    private final RestaurantRepository restaurantRepository;
+    private final RestaurantQueryService restaurantQueryService;
+
+    //Todo: 홈-오늘의 메뉴 조회
     @Override
-    public MenuDTO getTodayMenus() {
+    public HomeMenuDTO getTodayMenus() {
         LocalDate date = LocalDate.now();
 
         // 메뉴 데이터를 restaurantId로 그룹화
-        Map<Long, List<MenuDTO.TodayMenuInfo>> groupedMenus = menuRepository.findByDate(date).stream()
-                .map(menu -> MenuDTO.TodayMenuInfo.builder()
+        Map<Long, List<HomeMenuDTO.TodayMenuInfo>> groupedMenus = menuRepository.findByDate(date).stream()
+                .map(menu -> HomeMenuDTO.TodayMenuInfo.builder()
                         .date(menu.getDate())
                         .restaurantId(menu.getRestaurant().getId())
                         .menu(menu.getMenu())
@@ -35,15 +39,15 @@ public class MenuQueryServiceImpl implements MenuQueryService{
                         .mealType(menu.getMealType())
                         .build())
                 .collect(Collectors.groupingBy(
-                        MenuDTO.TodayMenuInfo::getRestaurantId
+                        HomeMenuDTO.TodayMenuInfo::getRestaurantId
                 ));
 
         // 그룹화된 데이터를 RestaurantMenus로 변환
-        List<MenuDTO.RestaurantMenus> restaurantMenusList = groupedMenus.entrySet().stream()
+        List<HomeMenuDTO.RestaurantMenus> restaurantMenusList = groupedMenus.entrySet().stream()
                 .map(entry -> {
-                    Restaurant restaurant = restaurantRepository.findById(entry.getKey())
-                            .orElseThrow(() -> new IllegalStateException("Restaurant not found"));
-                    return MenuDTO.RestaurantMenus.builder()
+                    Restaurant restaurant = restaurantQueryService.findById(entry.getKey());
+
+                    return HomeMenuDTO.RestaurantMenus.builder()
                             .restaurantId(entry.getKey())
                             .restaurantName(restaurant.getName())
                             .menus(entry.getValue())
@@ -51,8 +55,40 @@ public class MenuQueryServiceImpl implements MenuQueryService{
                 })
                 .collect(Collectors.toList());
 
-        return MenuDTO.builder()
+        return HomeMenuDTO.builder()
                 .todayMenus(restaurantMenusList)
+                .build();
+    }
+
+    //Todo: 비전타워 일주일 식단 메뉴 조회하기
+    @Override
+    public VisiontowerMenuDTO getVisiontowerMenus() {
+        Restaurant visiontower = restaurantQueryService.findByName("비전타워 식당");
+
+        Map<LocalDate, List<VisiontowerMenuDTO.TodayMenuInfo>> groupedMenus = menuRepository.findByRestaurant(visiontower).stream()
+                .map(menu -> {
+                    Menu menuEntity = (Menu) menu; // 명시적 타입 캐스팅
+                    return VisiontowerMenuDTO.TodayMenuInfo.builder()
+                            .date(menuEntity.getDate())
+                            .restaurantId(menuEntity.getRestaurant().getId())
+                            .menu(menuEntity.getMenu())
+                            .dayOfWeek(menuEntity.getType())
+                            .mealType(menuEntity.getMealType())
+                            .build();
+                })
+                .collect(Collectors.groupingBy(VisiontowerMenuDTO.TodayMenuInfo::getDate));
+
+        List<VisiontowerMenuDTO.RestaurantWeekMenus> dateMenusList = List.of(
+                VisiontowerMenuDTO.RestaurantWeekMenus.builder()
+                        .restaurantName(visiontower.getName())
+                        .menus(groupedMenus.values().stream()
+                                .flatMap(List::stream)
+                                .collect(Collectors.toList()))
+                        .build()
+        );
+
+        return VisiontowerMenuDTO.builder()
+                .weekRestaurantMenus(dateMenusList)
                 .build();
     }
 }
