@@ -65,27 +65,25 @@ public class MenuQueryServiceImpl implements MenuQueryService{
     public VisiontowerMenuDTO getVisiontowerMenus() {
         Restaurant visiontower = restaurantQueryService.findByName("비전타워 식당");
 
-        Map<LocalDate, List<VisiontowerMenuDTO.TodayMenuInfo>> groupedMenus = menuRepository.findByRestaurant(visiontower).stream()
-                .map(menu -> VisiontowerMenuDTO.TodayMenuInfo.builder()
-                            .date(menu.getDate())
-                            .restaurantId(menu.getRestaurant().getId())
-                            .menu(menu.getMenu())
-                            .dayOfWeek(menu.getType())
-                            .mealType(menu.getMealType())
-                            .build())
-                .collect(Collectors.groupingBy(VisiontowerMenuDTO.TodayMenuInfo::getDate));
-
-        List<VisiontowerMenuDTO.RestaurantWeekMenus> dateMenusList = List.of(
-                VisiontowerMenuDTO.RestaurantWeekMenus.builder()
-                        .restaurantName(visiontower.getName())
-                        .menus(groupedMenus.values().stream()
-                                .flatMap(List::stream)
+        List<VisiontowerMenuDTO.DayMenus> dayMenusList = menuRepository.findByRestaurant(visiontower).stream()
+                // 날짜로 그룹핑
+                .collect(Collectors.groupingBy(Menu::getDate))
+                .entrySet().stream()
+                .map(entry -> VisiontowerMenuDTO.DayMenus.builder()
+                        .date(entry.getKey())
+                        .dayOfWeek(entry.getValue().get(0).getType())
+                        .menus(entry.getValue().stream()
+                                .map(menu -> VisiontowerMenuDTO.MenuInfo.builder()
+                                        .menu(menu.getMenu())
+                                        .mealType(menu.getMealType())
+                                        .build())
                                 .collect(Collectors.toList()))
-                        .build()
-        );
+                        .build())
+                .collect(Collectors.toList());
 
         return VisiontowerMenuDTO.builder()
-                .weekRestaurantMenus(dateMenusList)
+                .dayMenus(dayMenusList)
                 .build();
+
     }
 }
