@@ -1,7 +1,5 @@
 package service.menuproject.web.dto.Response;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +11,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-public class VisiontowerMenuDTO {
+public class RestaurantMenuDTO {
 
     private List<DayMenus> dayMenus;
 
