@@ -2,6 +2,7 @@ package service.menuproject.web.contoroller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import service.menuproject.service.crawl.CrawlCommandServiceImpl;
@@ -17,11 +18,15 @@ public class testController {
     private  String pageurl = "https://www.gachon.ac.kr/kor/7347/subview.do";
 
 
-
+    @GetMapping("/health-check")
+    public String healthCheck(){
+        return "ok";
+    }
     @PostMapping("/crawl/visiontower")
     public void crawlVisiontower() throws IOException{
         menuCommandService.createVisiontowerMenu();
     }
+
 
     @PostMapping("/crawl/arm")
     public void crawlArm() throws IOException{

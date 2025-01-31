@@ -195,6 +195,7 @@ public class MenuCommandServiceImpl implements  MenuCommandService {
                         .build();
 
                 menuRepository.save(visiontowerMenu);
+
             }
         }
     }
