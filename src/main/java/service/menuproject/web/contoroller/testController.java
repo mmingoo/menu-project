@@ -2,6 +2,7 @@ package service.menuproject.web.contoroller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +20,8 @@ public class testController {
 
 
     @GetMapping("/health-check")
-    public String healthCheck(){
-        return "ok";
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("OK");
     }
     @PostMapping("/crawl/visiontower")
     public void crawlVisiontower() throws IOException{
