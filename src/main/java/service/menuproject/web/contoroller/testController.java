@@ -19,7 +19,7 @@ public class testController {
     private  String pageurl = "https://www.gachon.ac.kr/kor/7347/subview.do";
 
 
-    @GetMapping("/health-check")
+    @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {
         return ResponseEntity.ok("OK");
     }
