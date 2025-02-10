@@ -3,6 +3,7 @@ package service.menuproject.service.menu;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.select.Elements;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import service.menuproject.base.enums.DayOfWeek;
 import service.menuproject.domain.Menu;
@@ -28,6 +29,7 @@ public class MenuCommandServiceImpl implements  MenuCommandService {
     String currentDayOfWeek = null;
 
     @Override
+    @Scheduled(cron = "0 0 10 ? * MON")
     //Todo: 비전타워 메뉴 생성
     public void createVisiontowerMenu() throws IOException {
 
@@ -72,6 +74,7 @@ public class MenuCommandServiceImpl implements  MenuCommandService {
     }
 
     @Override
+    @Scheduled(cron = "0 0 10 ? * MON")
     //Todo: 아름관 메뉴 생성
     public void createArmMenu() throws IOException {
 
@@ -114,6 +117,8 @@ public class MenuCommandServiceImpl implements  MenuCommandService {
     }
 
     @Override
+    @Scheduled(cron = "0 0 10 ? * MON")
+
     //Todo: 학생생활관 메뉴 생성
     public void createDormitoryMenu() throws IOException {
 
@@ -158,6 +163,8 @@ public class MenuCommandServiceImpl implements  MenuCommandService {
 
 
     @Override
+    @Scheduled(cron = "0 0 10 ? * MON")
+
     //Todo: 메디컬 메뉴 생성
     public void createMedicalMenu() throws IOException {
 
