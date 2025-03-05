@@ -21,7 +21,7 @@ public class testController {
 
     @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {
-        return ResponseEntity.ok("OK!!");
+        return ResponseEntity.ok("OK!!!!");
     }
     @PostMapping("/crawl/visiontower")
     public void crawlVisiontower() throws IOException{
