@@ -22,7 +22,7 @@ jobs:
             echo "${{ secrets.YML }}" > /home/ubuntu/menu-project/src/main/resources/application.yml
             ls -l /home/ubuntu/menu-project/src/main/resources/application.yml
             sudo fuser -k -n tcp 8080 || true 
-            chmod +x ./gradlew
+            chmod +/gradlew
             ./gradlew clean build
             cd build/libs
             nohup java -jar menu-project-0.0.1-SNAPSHOT.jar > ./output.log 2>&1 &
