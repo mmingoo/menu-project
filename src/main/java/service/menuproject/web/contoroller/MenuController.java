@@ -43,7 +43,7 @@ public class MenuController {
     public BaseResponse<RestaurantMenuDTO> getDormitory(){
         RestaurantMenuDTO dormitoryMenuDto = menuQueryService.getWeekMenus("학생생활관 식당");
         return BaseResponse.onSuccess(dormitoryMenuDto);
-    }
+        }
 
     //Todo : 일주일치 메디컬 메뉴 조회
     @GetMapping("/medical")
