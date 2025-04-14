@@ -21,7 +21,7 @@ public class CrawlController {
 
     @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {
-        return ResponseEntity.ok("OK!!!!");
+        return ResponseEntity.ok("notOK!!!!");
     }
 
     // 비전타워 메뉴 크롤링
