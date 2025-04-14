@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Comparator;
+
 
 @Service
 @Repository
@@ -96,11 +98,13 @@ public class MenuQueryServiceImpl implements MenuQueryService{
                                         .build())
                                 .collect(Collectors.toList()))
                         .build())
+                .sorted(Comparator.comparing(RestaurantMenuDTO.DayMenus::getDate))
                 .collect(Collectors.toList());
+
 
         // 4. 최종 DTO 생성 및 반환
         return RestaurantMenuDTO.builder()
                 .dayMenus(dayMenusList)
                 .build();
-}
+    }
 }
