@@ -27,7 +27,8 @@
 
 
 # 프로젝트 구조
-![image](https://github.com/user-attachments/assets/f4e16148-9ad6-4d71-a5b4-67f504c592f7)
+![image](https://github.com/user-attachments/assets/f59da9a2-4ac7-43b6-9537-0f0fa3795908)
+
 
 
 # 크롤링 후 데이터 저장 과정
