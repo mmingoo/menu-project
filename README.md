@@ -19,6 +19,7 @@
 - Lombok
 - Jsoup (웹 크롤링)
 - Gradle
+- CI/CD
 
 
 # 아키텍쳐
