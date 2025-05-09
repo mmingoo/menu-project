@@ -23,7 +23,8 @@
 
 
 # 아키텍쳐
-![image](https://github.com/user-attachments/assets/cb8ecf61-17ce-4cbc-a772-a3b590678cf7)
+![image](https://github.com/user-attachments/assets/a5778eab-8957-4a84-bda1-103f726e2e82)
+
 
 
 # 프로젝트 구조
