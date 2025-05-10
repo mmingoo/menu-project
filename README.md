@@ -28,7 +28,8 @@
 
 
 # 프로젝트 구조
-![image](https://github.com/user-attachments/assets/f59da9a2-4ac7-43b6-9537-0f0fa3795908)
+![image](https://github.com/user-attachments/assets/c29237b6-2b89-4a13-8f6c-0d2eab08fe4c)
+
 
 
 
